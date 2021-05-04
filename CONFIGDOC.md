@@ -462,5 +462,5 @@ pipeline {
 
 
 ## See Also
-[Run MATLAB Tests on Jenkins Server](examples/Run-MATLAB-Tests.md)<br/>
-[Continuous Integration with MATLAB and Simulink](https://www.mathworks.com/solutions/continuous-integration.html)
+* [Run MATLAB Tests on Jenkins Server](examples/Run-MATLAB-Tests.md)<br/>
+* [Continuous Integration with MATLAB and Simulink](https://www.mathworks.com/solutions/continuous-integration.html)
