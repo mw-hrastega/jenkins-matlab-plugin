@@ -5,7 +5,7 @@ This plugin enables you to run MATLAB&reg; scripts, functions, and statements as
 For a detailed list of releases, see [Change Logs](/CHANGELOG.md). 
 
 ## Configuration Steps 
-To configure the plugin, see [Plugin Configuration Guide.](/CONFIGDOC.md)
+To configure the plugin, see [Plugin Configuration Guide](/CONFIGDOC.md).
 
 ## Examples
 To learn how to use the plugin in testing workflows, see [Examples](/examples/). 
