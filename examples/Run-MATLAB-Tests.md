@@ -43,11 +43,11 @@ Create a new project and configure it by following these steps:
 
 ![build_environment](https://user-images.githubusercontent.com/48831250/105091260-943ea280-5a6d-11eb-8d11-48747df7ec32.png)
 
-6. In the **Build** section, select **Add build step > Run MATLAB Tests**. Then, select your desired artifacts to be generated in the project workspace. The plugin in this example is configured to generate Cobertura code coverage and JUnit-style test result reports. Furthermore, the coverage report is generated only for the code in the `source` folder located in the root of your repository. For more information on how to configure the plugin, see [Plugin Configuration Guide](../CONFIGDOC.md).
+6. In the **Build** section, select **Add build step > Run MATLAB Tests**. Then, select your desired artifacts to be generated in the project workspace. The plugin in this example is configured to generate Cobertura code coverage and JUnit-style test results reports. Furthermore, the coverage report is generated only for the code in the `source` folder located in the root of your repository. For more information on how to configure the plugin, see [Plugin Configuration Guide](../CONFIGDOC.md).
 
 ![run_matlab_tests](https://user-images.githubusercontent.com/48831250/105909903-2149a480-5ff6-11eb-81f1-c3b44e9b17d1.png)
 
-7. In the **Post-build Actions** section, add two post-build actions to publish the Cobertura code coverage and JUnit-style test result reports. For each report, provide the path to the report file.
+7. In the **Post-build Actions** section, add two post-build actions to publish the Cobertura code coverage and JUnit-style test results reports. For each report, provide the path to the report file.
 
 ![post_build](https://user-images.githubusercontent.com/48831250/105082096-14aad680-5a61-11eb-9868-68d018199f9d.png)
 
