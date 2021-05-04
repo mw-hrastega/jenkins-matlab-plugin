@@ -70,7 +70,7 @@ By default, the **Run MATLAB Tests** step creates a test suite from all the test
 * Select **By folder name** if you want to create a test suite from specified folders. When you specify folder locations relative to the project root folder, the plugin creates a test suite using only the tests in the specified folders and their subfolders. You can specify more than one folder by clicking **Add folder**.
 
 * Select **By tag** if you want to select test suite elements using a specified test tag.
-* 
+
 ![run_matlab_tests_filter](https://user-images.githubusercontent.com/48831250/105909635-cfa11a00-5ff5-11eb-8642-7fc037dbedf5.png)
 
 Select the appropriate check boxes if you want to generate test or coverage artifacts. To publish the test results, you can use these artifacts with other Jenkins plugins. By default, the plugin assigns a name to each selected artifact and stores it in the `matlabTestArtifacts` folder of the project workspace. You can override the default artifact name and location by specifying a path relative to the project folder in the **File path** box. If you leave the text box empty, the plugin does not generate an artifact.   
