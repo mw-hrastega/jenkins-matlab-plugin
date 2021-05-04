@@ -19,7 +19,7 @@ Running the tests in this example requires you to interface Jenkins with MATLAB 
 
 * To run MATLAB tests and generate artifacts, you must install the plugin for MATLAB. For information on how to install a plugin in Jenkins, see [Managing Plugins](https://jenkins.io/doc/book/managing/plugins/).
 * Jenkins runs the tests in a branch of the remote repository that is specified by a URL. To follow the build steps in this example, the Times Table App project must be under Git&trade; source control. For example, you can create a new repository for the project using your GitHub&reg; account. For more information, see [Use Source Control with Projects](https://www.mathworks.com/help/matlab/matlab_prog/use-source-control-with-projects.html).
-* To publish the artifacts using post-build actions, relevant plugins must be installed on Jenkins. For example, the [Cobertura plugin](https://plugins.jenkins.io/cobertura) integrates Cobertura coverage reports to Jenkins, and [JUnit plugin](https://plugins.jenkins.io/junit) publishes JUnit-format test results. 
+* To publish the artifacts using post-build actions, relevant plugins must be installed on Jenkins. For example, the [Cobertura plugin](https://plugins.jenkins.io/cobertura) integrates Cobertura coverage reports to Jenkins, and [JUnit plugin](https://plugins.jenkins.io/junit) publishes JUnit-style test results. 
 
 ## Configure Jenkins Project to Run MATLAB Tests
 Create a new project and configure it by following these steps:
@@ -43,11 +43,11 @@ Create a new project and configure it by following these steps:
 
 ![build_environment](https://user-images.githubusercontent.com/48831250/105091260-943ea280-5a6d-11eb-8d11-48747df7ec32.png)
 
-6. In the **Build** section, select **Add build step > Run MATLAB Tests**. Then, select your desired artifacts to be generated in the project workspace. The plugin in this example is configured to generate Cobertura code coverage and JUnit test result reports. Furthermore, the coverage report is generated only for the code in the `source` folder located in the root of your repository. For more information on how to configure the plugin, see [Plugin Configuration Guide](../CONFIGDOC.md).
+6. In the **Build** section, select **Add build step > Run MATLAB Tests**. Then, select your desired artifacts to be generated in the project workspace. The plugin in this example is configured to generate Cobertura code coverage and JUnit-style test result reports. Furthermore, the coverage report is generated only for the code in the `source` folder located in the root of your repository. For more information on how to configure the plugin, see [Plugin Configuration Guide](../CONFIGDOC.md).
 
 ![run_matlab_tests](https://user-images.githubusercontent.com/48831250/105909903-2149a480-5ff6-11eb-81f1-c3b44e9b17d1.png)
 
-7. In the **Post-build Actions** section, add two post-build actions to publish the Cobertura code coverage and JUnit test result reports. For each report, provide the path to the report file.
+7. In the **Post-build Actions** section, add two post-build actions to publish the Cobertura code coverage and JUnit-style test result reports. For each report, provide the path to the report file.
 
 ![post_build](https://user-images.githubusercontent.com/48831250/105082096-14aad680-5a61-11eb-9868-68d018199f9d.png)
 
@@ -66,7 +66,7 @@ Access the published Cobertura code coverage report by opening the **Coverage Re
 
 ![cobertura_report](https://user-images.githubusercontent.com/48831250/105085331-9ac91c00-5a65-11eb-9628-efbf70520489.png)
 
-To view the published JUnit test results, open the **Latest Test Result** link in the project interface. In the new page, open the link in the **All Tests** table. The table expands and lists information for each of the test classes within the Times Table App project.  
+To view the published JUnit-style test results, open the **Latest Test Result** link in the project interface. In the new page, open the link in the **All Tests** table. The table expands and lists information for each of the test classes within the Times Table App project.  
 
 ![junit_report](https://user-images.githubusercontent.com/48831250/105088211-956dd080-5a69-11eb-931c-aef201eb9dbe.png)
 
