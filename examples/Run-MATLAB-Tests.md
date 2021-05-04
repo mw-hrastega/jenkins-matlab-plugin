@@ -71,5 +71,5 @@ To view the published JUnit-style test results, open the **Latest Test Result** 
 ![junit_report](https://user-images.githubusercontent.com/48831250/105088211-956dd080-5a69-11eb-931c-aef201eb9dbe.png)
 
 ## See Also
-[Plugin Configuration Guide](../CONFIGDOC.md)<br/>
-[Explore an Example Project (MATLAB)](https://www.mathworks.com/help/matlab/matlab_prog/explore-an-example-project.html)
+* [Plugin Configuration Guide](../CONFIGDOC.md)<br/>
+* [Explore an Example Project (MATLAB)](https://www.mathworks.com/help/matlab/matlab_prog/explore-an-example-project.html)
