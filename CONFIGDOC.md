@@ -249,7 +249,7 @@ node {
 }
 ``` 
 
-MATLAB exits with exit code 0 if the specified script, function, or statement executes successfully without error. Otherwise, MATLAB terminates with a nonzero exit code, which causes the build to fail. To ensure that the build fails in certain conditions, use the [`assert`](https://www.mathworks.com/help/matlab/ref/assert.html) or [`error`](https://www.mathworks.com/help/matlab/ref/error.html) functions.
+MATLAB exits with exit code 0 if the specified script, function, or statement executes successfully without error. Otherwise, MATLAB terminates with a nonzero exit code, which causes the stage to fail. If you properly react to the resulting MATLAB execution expection, the remaining stages of your Pipeline can still run and your build can succeed. Otherwise, Jenkins terminates the build in the current stage and marks it as a failure. To ensure that the stage fails in certain conditions, use the [`assert`](https://www.mathworks.com/help/matlab/ref/assert.html) or [`error`](https://www.mathworks.com/help/matlab/ref/error.html) functions.
 
 When you use the `runMATLABCommand` step, all of the required files must be on the MATLAB search path. If your script or function is not in the root of your repository, you can use the [`addpath`](https://www.mathworks.com/help/matlab/ref/addpath.html), [`cd`](https://www.mathworks.com/help/matlab/ref/cd.html), or [`run`](https://www.mathworks.com/help/matlab/ref/run.html) functions to ensure that it is on the path when invoked. For example, to run `myscript.m` in a folder `myfolder` located in the root of the repository, you can specify the `runMATLABCommand` step like this: 
 
