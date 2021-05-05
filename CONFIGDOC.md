@@ -259,7 +259,7 @@ When you use the `runMATLABCommand` step, all of the required files must be on t
 
 Use the `runMATLABTests` step in your Pipeline to run the tests in your MATLAB project and generate artifacts. By default, MATLAB includes any files in your project that have a `Test` label. If your Pipeline does not leverage a MATLAB project or uses a MATLAB release before R2019a, then MATLAB includes all tests in the root of your repository, including its subfolders.
 
-For example, in your `Jenkinsfile`, define a Declarative Pipeline to run the tests in your project and fail the build if any of the tests fails.
+For example, in your `Jenkinsfile`, define a Declarative Pipeline to run the tests in your project.
 
 
 ```groovy
@@ -285,6 +285,8 @@ node {
     runMATLABTests()  
 }
 ``` 
+
+MATLAB exits with exit code 0 if the test suite runs successfully without any test failures. Otherwise, MATLAB terminates with a nonzero exit code, which causes the stage to fail. If you properly react to the resulting MATLAB execution expection, the remaining stages of your Pipeline can still run and your build can succeed. Otherwise, Jenkins terminates the build in the current stage and marks it as a failure.
 
 You can customize your test run and generate artifacts by providing the `runMATLABTests` step with one or more name-value arguments. For instance, you can specify different types of artifacts and the locations to store them, or you can have control over which tests to run in your project.
 
