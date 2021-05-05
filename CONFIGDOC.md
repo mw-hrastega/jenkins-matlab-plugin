@@ -45,7 +45,7 @@ When you set up the **Build** section of the project configuration window, the p
 If you use a source code management (SCM) system such as Git&trade;, then your project should include the appropriate SCM configuration to check out the code before it can invoke the plugin. If you do not use any SCM systems to manage your code, then an additional build step might be required to ensure that the code is available in the project workspace before the build starts.
 
 #### Run MATLAB Command
-The **Run MATLAB Command** build step lets you specify MATLAB commands tailored to your specific needs. For example, you can use this build step to customize your test run or add a MATLAB related step to your automated pipeline of tasks.
+The **Run MATLAB Command** build step lets you run MATLAB scripts, functions, and statements. You can use this build step to customize your test run or add a MATLAB related step to your automated pipeline of tasks.
 
 If you specify more than one MATLAB command, use a comma or semicolon to separate the commands. The build fails if the execution of any command results in an error.
 
@@ -215,7 +215,7 @@ node {
 ``` 
 
 ### Use the runMATLABCommand Step
-Use the `runMATLABCommand` step in your Pipeline to run MATLAB scripts, functions, and statements tailored to your specific needs. You can use this task to flexibly customize your test run or run any MATLAB commands.
+Use the `runMATLABCommand` step in your Pipeline to run MATLAB scripts, functions, and statements. You can use this task to flexibly customize your test run or run any MATLAB commands.
 
 You must provide `runMATLABCommand` with a string that specifies the command you want to execute. If the command is the name of a MATLAB script or function, do not specify the file extension. If you specify more than one MATLAB command, use a comma or semicolon to separate them.
 
