@@ -35,9 +35,9 @@ When you specify a MATLAB version in the **Build Environment** section, the plug
 
 | Platform     | Path to MATLAB Root Folder      |
 |--------------|---------------------------------|
-| Windows      | C:\Program Files\MATLAB\R2020b  |
-| Linux&reg;   | /usr/local/MATLAB/R2020b        |
-| macOS        | /Applications/MATLAB_R2020b.app |
+| Windows      | C:\Program Files\MATLAB\R2021a  |
+| Linux&reg;   | /usr/local/MATLAB/R2021a        |
+| macOS        | /Applications/MATLAB_R2021a.app |
 
 ### Specify Build Steps
 When you set up the **Build** section of the project configuration window, the plugin provides you with the **Run MATLAB Command** and **Run MATLAB Tests** build steps.
@@ -181,16 +181,16 @@ You also can define your Pipeline directly in the project configuration window. 
 ### Add MATLAB to System Path
 When the plugin executes MATLAB related steps in your Pipeline, it uses the topmost MATLAB version on the system path. If the PATH environment variable of the build agent does not include any MATLAB versions, you must update the variable with the MATLAB root folder that should be used for the build.
 
-To update the system PATH environment variable using Declarative Pipeline syntax, use an `environment` block in your `Jenkinsfile`. For example, prepend MATLAB R2020b to the system PATH environment variable and use it to run your command.
+To update the system PATH environment variable using Declarative Pipeline syntax, use an `environment` block in your `Jenkinsfile`. For example, prepend MATLAB R2021a to the system PATH environment variable and use it to run your command.
 
 ```groovy
 // Declarative Pipeline
 pipeline {
    agent any
    environment {
-       PATH = "C:\\Program Files\\MATLAB\\R2020b\\bin;${PATH}"   // Windows agent
-    // PATH = "/usr/local/MATLAB/R2020b/bin:${PATH}"   // Linux agent
-    // PATH = "/Applications/MATLAB_R2020b.app/bin:${PATH}"   // macOS agent    
+       PATH = "C:\\Program Files\\MATLAB\\R2021a\\bin;${PATH}"   // Windows agent
+    // PATH = "/usr/local/MATLAB/R2021a/bin:${PATH}"   // Linux agent
+    // PATH = "/Applications/MATLAB_R2021a.app/bin:${PATH}"   // macOS agent    
    }
     stages{
         stage('Run MATLAB Command') {
@@ -207,9 +207,9 @@ If you define your Pipeline using Scripted Pipeline syntax, set the PATH environ
 ```groovy
 // Scripted Pipeline
 node {
-        env.PATH = "C:\\Program Files\\MATLAB\\R2020b\\bin;${env.PATH}"   //Windows agent
-     // env.PATH = "/usr/local/MATLAB/R2020b/bin:${env.PATH}"   //Linux agent
-     // env.PATH = "/Applications/MATLAB_R2020b.app/bin:${env.PATH}"   //macOS agent
+        env.PATH = "C:\\Program Files\\MATLAB\\R2021a\\bin;${env.PATH}"   //Windows agent
+     // env.PATH = "/usr/local/MATLAB/R2021a/bin:${env.PATH}"   //Linux agent
+     // env.PATH = "/Applications/MATLAB_R2021a.app/bin:${env.PATH}"   //macOS agent
         runMATLABCommand "disp('Hello World!')"
 }
 ``` 
@@ -340,7 +340,7 @@ node {
 ## Use MATLAB in Matrix Build
 Similar to multi-configuration projects, you can use MATLAB as part of a [matrix](https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-matrix) build in Pipeline projects. For example, you can define a Pipeline to run your test suite on different platforms or against different versions of MATLAB.
 
-This example shows how to define a Declarative Pipeline to run your MATLAB code and generate artifacts using MATLAB R2018b, R2019a, and R2020b. The Pipeline has a `matrix` block to define the possible name-value combinations that should run in parallel. 
+This example shows how to define a Declarative Pipeline to run your MATLAB code and generate artifacts using MATLAB R2019a, R2020b, and R2021a. The Pipeline has a `matrix` block to define the possible name-value combinations that should run in parallel. 
 
 ```groovy
 // Declarative Pipeline
@@ -356,7 +356,7 @@ pipeline {
                 axes {
                     axis {
                         name 'MATLAB_VERSION'
-                        values 'R2018b', 'R2019a', 'R2020b'
+                        values 'R2019a', 'R2020b', 'R2021a'
                     }
                 }
                 stages {
@@ -407,14 +407,14 @@ For example, on a Linux remote agent, register MATLAB R2020b as a tool.
 ![tool_remote](https://user-images.githubusercontent.com/48831250/98685471-67676400-2335-11eb-9db5-bd027bc053f6.PNG)
 
 ### Use MATLAB as a Tool in Pipeline Project
-To invoke MATLAB as a Jenkins tool using Declarative Pipeline syntax, use a `tools` block in your `Jenkinsfile`. To specify the tool in the block, use the `matlab` keyword followed by the name assigned to the tool on the **Global Tool Configuration** page. For example, run the commands in a file `myscript.m` using the MATLAB version that has been registered as a tool named R2020b.  
+To invoke MATLAB as a Jenkins tool using Declarative Pipeline syntax, use a `tools` block in your `Jenkinsfile`. To specify the tool in the block, use the `matlab` keyword followed by the name assigned to the tool on the **Global Tool Configuration** page. For example, run the commands in a file `myscript.m` using the MATLAB version that has been registered as a tool named R2021a.  
 
 ```groovy
 // Declarative Pipeline
 pipeline {
    agent any
    tools {
-       matlab 'R2020b'
+       matlab 'R2021a'
    }
     stages{
         stage('Run MATLAB Command') {
@@ -435,7 +435,7 @@ If you define your Pipeline using Scripted Pipeline syntax, use the `tool` keywo
 node {
     def matlabver
     stage('Run MATLAB Command') {
-        matlabver = tool 'R2020b'
+        matlabver = tool 'R2021a'
         if (isUnix()){
             env.PATH = "${matlabver}/bin:${env.PATH}"   // Linux or macOS agent
         }else{
@@ -458,7 +458,7 @@ pipeline {
                 axes {
                     axis {
                         name 'MATLAB_VERSION'
-                        values 'R2018b', 'R2019a', 'R2020b'
+                        values 'R2019a', 'R2020b', 'R2021a'
                     }
                 }
                 tools{
