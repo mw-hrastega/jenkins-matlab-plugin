@@ -84,6 +84,30 @@ The **Run MATLAB Tests** build step produces a MATLAB script file and uses it to
 
 * Producing a PDF test report is not currently supported on macOS platforms.
  
+ 
+>  **Note:**
+>* The plugin does not create the `matlabTestArtifacts` folder if the name of the folder does not appear in any of the displayed **File path** boxes.
+>
+>* Producing a PDF test report is not currently supported on macOS platforms.
+ 
+ 
+ > **Note:** The plugin does not create the `matlabTestArtifacts` folder if the name of the folder does not appear in any of the displayed **File path** boxes.
+ 
+ > **Note:** Producing a PDF test report is not currently supported on macOS platforms.
+ 
+ 
+ 
+> :information_source: **Note:** Producing a PDF test report is not currently supported on macOS platforms.
+
+> :grey_exclamation: **Note:** Producing a PDF test report is not currently supported on macOS platforms.
+
+> :heavy_check_mark: **Note:** Producing a PDF test report is not currently supported on macOS platforms.
+
+> :white_check_mark: **Note:** Producing a PDF test report is not currently supported on macOS platforms.
+  
+
+
+
 ## Set Up Freestyle Project
 To configure the plugin for a freestyle project, specify the MATLAB version to use as well as the required build steps.
 
