@@ -235,7 +235,7 @@ When you use the `runMATLABCommand` step, all the required files must be on the 
 `runMATLABCommand 'addpath('myfolder'), myscript'` 
 
 ### Use the runMATLABTests Step
-Use the `runMATLABTests` step in your Pipeline to run the tests in your MATLAB project and generate artifacts. By default, the plugin includes any test files in your [MATLAB project](https://www.mathworks.com/help/matlab/projects.html) that have a `Test` label. If your Pipeline does not use a MATLAB project, or if it uses a MATLAB release before R2019a, then the plugin includes all tests in the root of your repository or in any of its subfolders.
+Use the `runMATLABTests` step in your Pipeline to run MATLAB and Simulink tests and generate various code and coverage artifacts. By default, the plugin includes any test files in your [MATLAB project](https://www.mathworks.com/help/matlab/projects.html) that have a `Test` label. If your Pipeline does not use a MATLAB project, or if it uses a MATLAB release before R2019a, then the plugin includes all tests in the root of your repository or in any of its subfolders.
 
 For example, in your `Jenkinsfile`, define a Declarative Pipeline to run the tests in your project.
 
@@ -266,9 +266,21 @@ node {
 
 MATLAB exits with exit code 0 if the test suite runs successfully without any test failures. Otherwise, MATLAB terminates with a nonzero exit code, which causes the current stage to fail. If you properly react to the resulting MATLAB execution exception, the remaining stages of your Pipeline can still run, and your build can succeed. Otherwise, Jenkins terminates the build in the current stage and marks it as a failure.
 
-You can customize your test run and generate artifacts by providing the `runMATLABTests` step with one or more name-value arguments. For instance, you can add folders to the MATLAB search path, control which tests to run, and generate various code and coverage artifacts.
+The `runMATLABTests` step lets you customize your test run using optional inputs. For example, you can add folders to the MATLAB search path, control which tests to run, and generate various artifacts.
 
-When you specify name-value arguments, use a colon to separate names and values. For example, define a Declarative Pipeline to run the tests in your MATLAB project, and then generate a JUnit-style test results report and a Cobertura code coverage report at specified locations on the build agent. Generate the coverage report for only the code in the `source` folder in the root of your repository. 
+Input                     | Description    
+------------------------- | ---------------
+`sourceFolder`            | (Optional) Location of the folder containing source code, relative to the project root folder. The specified folder and its subfolders are added to the top of the MATLAB search path. If you specify `sourceFolder` and then generate a coverage report, the plugin uses only the source code in the specified folder and its subfolders to generate the report.<br/>**Example:** `['source']`<br/>**Example:** `['source/folderA', 'source/folderB']`
+`selectByFolder`          | (Optional) Location of the folder used to select test suite elements, relative to the project root folder. To create a test suite, the plugin uses only the tests in the specified folder and its subfolders.<br/>**Example:** `['test']`<br/>**Example:** `['test/folderA', 'test/folderB']`
+`selectByTag`             | (Optional) Test tag used to select test suite elements. To create a test suite, the plugin uses only the test elements with the specified tag.<br/>**Example:** `'FeatureA'`
+`testResultsPDF`          | (Optional) Path to write test results report in PDF format. Currently, this input is not supported on macOS platforms.<br/>**Example:** `'test-results/results.pdf'`      
+`testResultsTAP`          | (Optional) Path to write test results report in TAP format.<br/>**Example:** `'test-results/results.tap'`
+`testResultsJUnit`        | (Optional) Path to write test results report in JUnit XML format.<br/>**Example:** `'test-results/results.xml'`
+`testResultsSimulinkTest` | (Optional) Path to export Simulink Test Manager results in MLDATX format. This input requires a Simulink Test license and is supported in MATLAB R2019a and later.<br/>**Example:** `'test-results/results.mldatx'`
+`codeCoverageCobertura`   | (Optional) Path to write code coverage report in Cobertura XML format.<br/>**Example:** `'code-coverage/coverage.xml'`
+`modelCoverageCobertura`  | (Optional) Path to write model coverage report in Cobertura XML format. This input requires a Simulink Coverage license and is supported in MATLAB R2018b and later.<br/>**Example:** `'model-coverage/coverage.xml'`
+
+For instance, define a Declarative Pipeline to run the tests in your MATLAB project, and then generate a JUnit-style test results report and a Cobertura code coverage report at specified locations on the build agent. Generate the coverage report for only the code in the `source` folder in the root of your repository. 
 
 
 ```groovy
@@ -298,20 +310,6 @@ node {
                    sourceFolder: ['source']) 
 }
 ``` 
-
- This table lists the name-value arguments that you can specify with the `runMATLABTests` step.
-
-Argument                  | Description    
-------------------------- | ---------------
-`sourceFolder`            | (Optional) Location of the folder containing source code, relative to the project root folder. The specified folder and its subfolders are added to the top of the MATLAB search path. If you specify `sourceFolder` and then generate a coverage report, the plugin uses only the source code in the specified folder and its subfolders to generate the report.<br/>**Example:** `['source']`<br/>**Example:** `['source/folderA', 'source/folderB']`
-`selectByFolder`          | (Optional) Location of the folder used to select test suite elements, relative to the project root folder. To create a test suite, the plugin uses only the tests in the specified folder and its subfolders.<br/>**Example:** `['test']`<br/>**Example:** `['test/folderA', 'test/folderB']`
-`selectByTag`             | (Optional) Test tag used to select test suite elements. To create a test suite, the plugin uses only the test elements with the specified tag.<br/>**Example:** `'FeatureA'`
-`testResultsPDF`          | (Optional) Path to write test results report in PDF format. Currently, this argument is not supported on macOS platforms.<br/>**Example:** `'test-results/results.pdf'`      
-| `testResultsTAP`        | (Optional) Path to write test results report in TAP format.<br/>**Example:** `'test-results/results.tap'`                  	|
-`testResultsJUnit`        | (Optional) Path to write test results report in JUnit XML format.<br/>**Example:** `'test-results/results.xml'`
-`testResultsSimulinkTest` | (Optional) Path to export Simulink Test Manager results in MLDATX format. This argument requires a Simulink Test license and is supported in MATLAB R2019a and later.<br/>**Example:** `'test-results/results.mldatx'`
-`codeCoverageCobertura`   | (Optional) Path to write code coverage report in Cobertura XML format.<br/>**Example:** `'code-coverage/coverage.xml'`
-`modelCoverageCobertura`  | (Optional) Path to write model coverage report in Cobertura XML format. This argument requires a Simulink Coverage license and is supported in MATLAB R2018b and later.<br/>**Example:** `'model-coverage/coverage.xml'`
 
 ## Use MATLAB in Matrix Build
 Like multi-configuration projects, you can use MATLAB as part of a [matrix](https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-matrix) build in Pipeline projects. For example, you can define a Pipeline to run your test suite on different platforms or against different versions of MATLAB.
