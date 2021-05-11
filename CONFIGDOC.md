@@ -60,58 +60,36 @@ When you use this step, all of the required files must be on the MATLAB search p
 `addpath('myfolder'), myscript`
 
 #### Run MATLAB Tests
-This build step uses a default setting to run tests authored using the MATLAB Unit Testing Framework or Simulink Test&trade;. By default, if your code is organized into files and folders within a MATLAB project, then the plugin includes any test files in the project that have been labeled as `Test`. If you do not use a MATLAB project, or if you use a MATLAB release before R2019a, then the plugin includes all tests in the project workspace, including its subfolders.
+This build step lets you run MATLAB and Simulink tests and generate artifacts such as JUnit-style test results and Cobertura coverage reports. By default, the plugin includes any test files in your [MATLAB project](https://www.mathworks.com/help/matlab/projects.html) that have a `Test` label. If your build does not use a MATLAB project, or if it uses a MATLAB release before R2019a, then the plugin includes all tests in the project workspace, including its subfolders.
  
-With the **Run MATLAB Tests** build step, you can customize your test run using the existing options in the step configuration panel. For example, you can add folders to the MATLAB search path, control which tests to run, and generate various code and coverage artifacts. If you do not select any of the check boxes, all the tests in your project run, and any test failure causes the build to fail.
+With the **Run MATLAB Tests** build step, you can customize your test run using the existing options in the step configuration interface. For example, you can add folders to the MATLAB search path, control which tests to run, and generate various code and coverage artifacts. If you do not select any of the check boxes, all the tests in your project run, and any test failure causes the build to fail.
  
 ![run_matlab_tests](https://user-images.githubusercontent.com/48831250/105909610-c2842b00-5ff5-11eb-9b6a-9530ae7289ff.png)
  
-Select **Source folder** if you want to specify source code folders in your build. When you specify source folder locations relative to the project root folder, the plugin adds the folders and their subfolders to the top of the MATLAB search path. Also, if you specify source code folders and then choose to generate a coverage report, the plugin uses only the code in the specified folders and their subfolders to generate the report. You can specify more than one folder by clicking **Add folder**.
+Select **Source folder** if you want to specify the location of a folder containing source code, relative to the project root folder. The plugin adds the specified folder and its subfolders to the top of the MATLAB search path. If you specify a source folder and then generate a coverage report, the plugin uses only the source code in the specified folder and its subfolders to generate the report. You can specify more than one folder by clicking **Add folder**.
 
 ![run_matlab_tests_source](https://user-images.githubusercontent.com/48831250/104773323-e5375980-5742-11eb-84ed-e71a23a2dc55.png)
 
 By default, the **Run MATLAB Tests** step creates a test suite from all the tests in your project. To create a filtered test suite, select **By folder name**, **By tag**, or both:
 
-* Select **By folder name** if you want to create a test suite from specified folders. When you specify folder locations relative to the project root folder, the plugin creates a test suite using only the tests in the specified folders and their subfolders. You can specify more than one folder by clicking **Add folder**.
+* Select **By folder name** if you want to specify the location of a folder containing test files, relative to the project root folder. The plugin creates a test suite using only the tests in the specified folder and its subfolders. You can specify more than one folder by clicking **Add folder**.
 
 * Select **By tag** if you want to select test suite elements using a specified test tag.
 
 ![run_matlab_tests_filter](https://user-images.githubusercontent.com/48831250/105909635-cfa11a00-5ff5-11eb-8642-7fc037dbedf5.png)
 
-Select the appropriate check boxes if you want to generate test or coverage artifacts. To publish the test results, you can use these artifacts with other Jenkins plugins. By default, the plugin assigns a name to each selected artifact and stores it in the `matlabTestArtifacts` folder of the project workspace. You can override the default artifact name and location by specifying a path relative to the project folder in the **File path** box. If you leave the text box empty, the plugin does not generate an artifact.   
+ Select check boxes in the **Generate Test Artifacts** and **Generate Coverage Artifacts** sections if you want to generate test and coverage artifacts. To publish the test results, you can use these artifacts with other Jenkins plugins. By default, the plugin assigns a name to each selected artifact and stores it in the `matlabTestArtifacts` folder of the project workspace. You can override the default artifact name and location by specifying a path relative to the project folder in the **File path** box. If you leave the text box empty, the plugin does not generate an artifact.
+
+The plugin does not create the `matlabTestArtifacts` folder if the name of the folder does not appear in any of the displayed **File path** boxes.
 
 ![run_matlab_tests_artifacts](https://user-images.githubusercontent.com/48831250/104773381-f7b19300-5742-11eb-9dad-392c5ca8777d.png)
 
 The **Run MATLAB Tests** build step produces a MATLAB script file and uses it to run the tests and generate the artifacts. The plugin writes the contents of this file to the build log. You can review the build log in **Console Output** to understand the testing workflow.
  
-**Note:**
-* The plugin does not create the `matlabTestArtifacts` folder if the name of the folder does not appear in any of the displayed **File path** boxes.
-
+Artifacts to generate with the plugin are subject to these restrictions: 
 * Producing a PDF test report is not currently supported on macOS platforms.
- 
- 
->  **Note:**
->* The plugin does not create the `matlabTestArtifacts` folder if the name of the folder does not appear in any of the displayed **File path** boxes.
->
->* Producing a PDF test report is not currently supported on macOS platforms.
- 
- 
- > **Note:** The plugin does not create the `matlabTestArtifacts` folder if the name of the folder does not appear in any of the displayed **File path** boxes.
- 
- > **Note:** Producing a PDF test report is not currently supported on macOS platforms.
- 
- 
- 
-> :information_source: **Note:** Producing a PDF test report is not currently supported on macOS platforms.
-
-> :grey_exclamation: **Note:** Producing a PDF test report is not currently supported on macOS platforms.
-
-> :heavy_check_mark: **Note:** Producing a PDF test report is not currently supported on macOS platforms.
-
-> :white_check_mark: **Note:** Producing a PDF test report is not currently supported on macOS platforms.
-  
-
-
+* Exporting Simulink Test&trade; Manager results requires a Simulink Test&reg; license and is supported in MATLAB R2019a or later.
+* Producing a Cobertura model coverage report requires a Simulink Coverage&trade; license and is supported in MATLAB R2018b or later.
 
 ## Set Up Freestyle Project
 To configure the plugin for a freestyle project, specify the MATLAB version to use as well as the required build steps.
@@ -339,7 +317,7 @@ node {
 | `testResultsJUnit`        	| Path to write test results report in JUnit XML format.<br/>**Example:** `'test-results/results.xml'`            	|
 | `testResultsSimulinkTest` 	| Path to export Simulink Test Manager results in MLDATX format (requires Simulink Test license and is supported in MATLAB R2019a or later).<br/>**Example:** `'test-results/results.mldatx'` 	|
 | `codeCoverageCobertura`   	| Path to write code coverage report in Cobertura XML format.<br/>**Example:** `'code-coverage/coverage.xml'`     	|
-| `modelCoverageCobertura`  	| Path to write model coverage report in Cobertura XML format (requires Simulink Coverage™ license and is supported in MATLAB R2018b or later).<br/>**Example:** `'model-coverage/coverage.xml'`   	|
+| `modelCoverageCobertura`  	| Path to write model coverage report in Cobertura XML format (requires Simulink Coverage license and is supported in MATLAB R2018b or later).<br/>**Example:** `'model-coverage/coverage.xml'`   	|
 
 
 
