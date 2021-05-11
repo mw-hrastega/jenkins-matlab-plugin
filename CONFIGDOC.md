@@ -97,7 +97,7 @@ To specify the MATLAB version, select **Use MATLAB version** in the **Build Envi
 ![build_environment](https://user-images.githubusercontent.com/48831250/105088650-2cd32380-5a6a-11eb-94ee-533f7f7fdf78.png)
 
 To run MATLAB code and Simulink models, specify the appropriate build steps in the **Build** section:
-* If you add the [**Run MATLAB Command**](#run-matlab-command) build step, Specify your MATLAB script, function, or statement in the **Command** box. 
+* If you add the [**Run MATLAB Command**](#run-matlab-command) build step, specify your MATLAB script, function, or statement in the **Command** box. 
 * If you add the [**Run MATLAB Tests**](#run-matlab-tests) build step, specify the source code, the test suite filters, and the artifacts to be generated in the project workspace.
    
 ## Set Up Multi-Configuration Project
@@ -112,14 +112,16 @@ There are two ways to specify multiple MATLAB versions in a multi-configuration 
 ![add_axis](https://user-images.githubusercontent.com/48831250/105097497-b0930d00-5a76-11eb-9ccf-585f2d6e0bcc.png)
 
 ### Add MATLAB Axis
-If your Jenkins instance includes MATLAB versions registered as tools, then MATLAB appears as an option when you click **Add axis** in the **Configuration Matrix** section. By adding the MATLAB axis, you can select MATLAB versions and add them as axis values to your matrix configuration. The list includes all MATLAB versions that have been registered as Jenkins tools. In this example, there are two MATLAB versions registered as tools. In each build iteration, the plugin prepends one of the selected versions to the PATH environment variable and invokes it to run the build. 
+If your Jenkins instance includes MATLAB versions registered as tools, then **MATLAB** appears as an option when you click **Add axis** in the **Configuration Matrix** section. By adding the **MATLAB** axis, you can select MATLAB versions and add them as axis values to your matrix configuration. The list includes all MATLAB versions that have been registered as Jenkins tools. In this example, there are two MATLAB versions registered as tools. In each build iteration, the plugin prepends one of the selected versions to the PATH environment variable and invokes it to run the build. 
 
 ![matlab_axis](https://user-images.githubusercontent.com/48831250/106194057-554ed200-617c-11eb-9fa5-7d74a9a8a510.png)
 
 For more information about registering a MATLAB version as a tool, see [Register MATLAB as Jenkins Tool](#register-matlab-as-jenkins-tool).
 
+> :information_source: **Note:** When you add the **MATLAB** axis, do not select **Use MATLAB version**. Any values you specify by **Use MATLAB version** take precedence over the values specified by the **MATLAB** axis.
+
 ### Add User-Defined Axis
-If you do not specify the MATLAB axis, add a user-defined axis in the **Configuration Matrix** section to specify the MATLAB versions in the build. Enter the name of the axis in the **Name** box and its values in the **Values** box. Separate the values with a space. In this example, two MATLAB versions are specified to run the same set of tests.
+If you do not specify the **MATLAB** axis, add a user-defined axis in the **Configuration Matrix** section to specify the MATLAB versions in the build. Enter the name of the axis in the **Name** box and its values in the **Values** box. Separate the values with a space. In this example, two MATLAB versions are specified to run the same set of tests.
 
 ![user_defined_axis](https://user-images.githubusercontent.com/48831250/105099544-d968d180-5a79-11eb-9fb6-a9bbf262c09d.png)
 
@@ -127,25 +129,23 @@ When you add a user-defined axis to specify MATLAB versions, you must also speci
 
 ![build_environment_matrix](https://user-images.githubusercontent.com/48831250/105099364-90b11880-5a79-11eb-86de-c026a1dd2a1a.png)
 
-Note that a multi-configuration project creates a separate workspace for each user-defined axis value. If you specify the full paths to where different MATLAB versions are installed as axis values, the plugin fails to create separate workspaces and fails the build.
+> :information_source: **Note:** A multi-configuration project creates a separate workspace for each user-defined axis value. If you specify the full paths to where different MATLAB versions are installed as axis values, the plugin fails to create separate workspaces and fails the build.
 
-You can add several axes in the **Configuration Matrix** section. For example, add the MATLAB axis to specify MATLAB versions and the user-defined `TEST_TAG` axis to specify the test tags for a group of tests.
+> :information_source: **Note:** Both `$VAR` and `${VAR}` are valid formats for accessing the values of the axis `VAR`. On macOS platforms, the `${VAR}` format is recommended.
+
+You can add several axes in the **Configuration Matrix** section. For example, add the **MATLAB** axis to specify MATLAB versions and the user-defined `TEST_TAG` axis to specify the test tags for a group of tests.
 
 ![axis_matlab_testtag](https://user-images.githubusercontent.com/48831250/106194098-6566b180-617c-11eb-8501-64a192378580.png)
 
 Once you have specified the axes, add the required build steps in the **Build** section:
 
-   *   If you add the [**Run MATLAB Tests**](#run-matlab-tests) build step, specify the source code, the test suite filters, and the artifacts to be generated in the project workspace.
-   *   If you add the [**Run MATLAB Command**](#run-matlab-command) build step, enter your commands in the **Command** box. You can use the user-defined axes to create your commands. For example:
+* If you add the [**Run MATLAB Command**](#run-matlab-command) build step, specify your MATLAB script, function, or statement in the **Command** box. You can use the user-defined axes to specify the contents of the **Command** box. For example:
    
 ```
 results = runtests(pwd,'Tag','$TEST_TAG'); assertSuccess(results);
 ```
 
-**Note:**
-* Both `$VAR` and `${VAR}` are valid formats for accessing the values of the axis `VAR`. On macOS platforms, the `${VAR}` format is recommended.
-
-* When you add the MATLAB axis, do not select **Use MATLAB version**. Any values you specify by **Use MATLAB version** take precedence over the values specified by the MATLAB axis.
+* If you add the [**Run MATLAB Tests**](#run-matlab-tests) build step, specify the source code, the test suite filters, and the artifacts to be generated in the project workspace.
 
 ## Set Up Pipeline Project
 When you define your Pipeline with a `Jenkinsfile`, the plugin provides you with a step to run MATLAB scripts, functions, and statements. The plugin also provides a step to run MATLAB and Simulink tests. These steps are common to both Declarative and Scripted Pipelines.
