@@ -31,7 +31,7 @@ In this example, the list includes two registered tools as well as the option fo
 
 When you specify a MATLAB version in the **Build Environment** section, the plugin prepends its `bin` folder to the system PATH environment variable of the build agent and invokes it to perform the build. If the build agent already has your desired MATLAB on the path, then you are not required to select **Use MATLAB version**. The plugin always uses the topmost MATLAB version on the system path. The build fails if the operating system cannot find MATLAB on the path.
 
-**Note:** The [`matlabroot`](https://www.mathworks.com/help/matlab/ref/matlabroot.html) function returns the full path to the MATLAB root folder, which depends on the platform, MATLAB version, and installation location. This table shows examples of the root folder path on different platforms. 
+You can use the [`matlabroot`](https://www.mathworks.com/help/matlab/ref/matlabroot.html) function to return the full path to your desired MATLAB root folder. The path depends on the platform, MATLAB version, and installation location. This table shows examples of the root folder path on different platforms. 
 
 | Platform     | Path to MATLAB Root Folder      |
 |--------------|---------------------------------|
