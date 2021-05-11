@@ -49,6 +49,8 @@ The **Run MATLAB Command** build step lets you run MATLAB scripts, functions, an
 
 Specify the MATLAB script, function, or statement you want to execute in the **Command** box. If you specify more than one script, function, or statement, use a comma or semicolon to separate them. If you want to run a script or function, do not specify the file extension.
 
+For example, run a script named `myscript.m` in the root of your repository.
+
 ![run_matlab_command](https://user-images.githubusercontent.com/48831250/94472499-d8ddbf80-0198-11eb-8f25-ead3c4039f55.png)
 
 MATLAB exits with exit code 0 if the specified script, function, or statement executes successfully without error. Otherwise, MATLAB terminates with a nonzero exit code, which causes the build to fail. To ensure that the build fails in certain conditions, use the [`assert`](https://www.mathworks.com/help/matlab/ref/assert.html) or [`error`](https://www.mathworks.com/help/matlab/ref/error.html) functions.
