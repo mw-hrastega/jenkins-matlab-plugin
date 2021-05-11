@@ -88,7 +88,7 @@ The **Run MATLAB Tests** build step produces a MATLAB script file and uses it to
  
 Artifacts to generate with the plugin are subject to these restrictions: 
 * Producing a PDF test report is not currently supported on macOS platforms.
-* Exporting Simulink Test&trade; Manager results requires a Simulink Test&reg; license and is supported in MATLAB R2019a or later.
+* Exporting Simulink Test&trade; Manager results requires a Simulink Test license and is supported in MATLAB R2019a or later.
 * Producing a Cobertura model coverage report requires a Simulink Coverage&trade; license and is supported in MATLAB R2018b or later.
 
 ## Set Up Freestyle Project
