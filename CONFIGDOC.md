@@ -45,7 +45,7 @@ When you set up the **Build** section of the project configuration window, the p
 If you use a source code management (SCM) system such as Git&trade;, then your project should include the appropriate SCM configuration to check out the code before it can invoke the plugin. If you do not use any SCM systems to manage your code, then an additional build step might be required to ensure that the code is available in the project workspace before the build starts.
 
 #### Run MATLAB Command
-The **Run MATLAB Command** build step lets you run MATLAB scripts, functions, and statements. You can use this build step to customize your test run or add a MATLAB related step to your build.
+The **Run MATLAB Command** build step lets you run MATLAB scripts, functions, and statements. You can use this build step to customize your test run or execute any MATLAB commands.
 
 Specify the MATLAB script, function, or statement you want to execute in the **Command** box. If you specify more than one script, function, or statement, use a comma or semicolon to separate them. If you want to run a script or function, do not specify the file extension.
 
@@ -156,7 +156,7 @@ To configure the plugin for a Pipeline project:
 3) Select your source control system from the **SCM** list.
 4) Paste your repository URL into the **Repository URL** box.
 
-You also can define your Pipeline directly in the project configuration window. If you select **Pipeline script** from the **Definition** list, you can author your Pipeline code in the **Script** box. When you define your Pipeline this way, your Pipeline must include an additional stage to check out MATLAB code from source control.
+You also can define your Pipeline directly in the project configuration window. If you select **Pipeline script** from the **Definition** list, you can author your Pipeline code in the **Script** box. When you define your Pipeline this way, it must include an additional stage to check out your code from source control.
 
 ### Add MATLAB to System Path
 When the plugin executes MATLAB related steps in your Pipeline, it uses the topmost MATLAB version on the system path. If the PATH environment variable of the build agent does not include any MATLAB versions, you must update the variable with the MATLAB root folder that should be used for the build.
@@ -187,23 +187,22 @@ If you define your Pipeline using Scripted Pipeline syntax, set the PATH environ
 ```groovy
 // Scripted Pipeline
 node {
-        env.PATH = "C:\\Program Files\\MATLAB\\R2021a\\bin;${env.PATH}"   //Windows agent
-     // env.PATH = "/usr/local/MATLAB/R2021a/bin:${env.PATH}"   //Linux agent
-     // env.PATH = "/Applications/MATLAB_R2021a.app/bin:${env.PATH}"   //macOS agent
-        runMATLABCommand "disp('Hello World!')"
+    env.PATH = "C:\\Program Files\\MATLAB\\R2021a\\bin;${env.PATH}"   //Windows agent
+    // env.PATH = "/usr/local/MATLAB/R2021a/bin:${env.PATH}"   //Linux agent
+    // env.PATH = "/Applications/MATLAB_R2021a.app/bin:${env.PATH}"   //macOS agent
+    runMATLABCommand "disp('Hello World!')"
 }
 ``` 
 
 ### Use the runMATLABCommand Step
-Use the `runMATLABCommand` step in your Pipeline to run MATLAB scripts, functions, and statements. You can use this task to flexibly customize your test run or run any MATLAB commands.
+Use the `runMATLABCommand` step in your Pipeline to run MATLAB scripts, functions, and statements. You can use this step to customize your test run or execute any MATLAB commands.
 
-You must provide `runMATLABCommand` with a string that specifies the command you want to execute. If the command is the name of a MATLAB script or function, do not specify the file extension. If you specify more than one MATLAB command, use a comma or semicolon to separate them.
+You must provide `runMATLABCommand` with a string that specifies script, function, or statement you want to execute. If you specify more than one script, function, or statement, use a comma or semicolon to separate them. If you want to run a script or function, do not specify the file extension.
 
 **Example:** `runMATLABCommand 'myscript'`<br/>
 **Example:** `runMATLABCommand 'results = runtests, assertSuccess(results);'` 
 
-For example, in your `Jenkinsfile`, define a Declarative Pipeline to run the commands in a file named `myscript.m`.
-
+For example, in your `Jenkinsfile`, define a Declarative Pipeline to run a script named `myscript.m`.
 
 ```groovy
 // Declarative Pipeline
@@ -229,15 +228,14 @@ node {
 }
 ``` 
 
-MATLAB exits with exit code 0 if the specified script, function, or statement executes successfully without error. Otherwise, MATLAB terminates with a nonzero exit code, which causes the stage to fail. If you properly react to the resulting MATLAB execution exception, the remaining stages of your Pipeline can still run and your build can succeed. Otherwise, Jenkins terminates the build in the current stage and marks it as a failure. To ensure that the stage fails in certain conditions, use the [`assert`](https://www.mathworks.com/help/matlab/ref/assert.html) or [`error`](https://www.mathworks.com/help/matlab/ref/error.html) functions.
+MATLAB exits with exit code 0 if the specified script, function, or statement executes successfully without error. Otherwise, MATLAB terminates with a nonzero exit code, which causes the stage to fail. If you properly react to the resulting MATLAB execution exception, the remaining stages of your Pipeline can still run and your build can succeed. Otherwise, Jenkins terminates the build in the current stage and marks it as a failure.
 
 When you use the `runMATLABCommand` step, all of the required files must be on the MATLAB search path. If your script or function is not in the root of your repository, you can use the [`addpath`](https://www.mathworks.com/help/matlab/ref/addpath.html), [`cd`](https://www.mathworks.com/help/matlab/ref/cd.html), or [`run`](https://www.mathworks.com/help/matlab/ref/run.html) functions to ensure that it is on the path when invoked. For example, to run `myscript.m` in a folder `myfolder` located in the root of the repository, you can specify the `runMATLABCommand` step like this: 
 
 `runMATLABCommand 'addpath('myfolder'), myscript'` 
 
 ### Use the runMATLABTests Step
-
-Use the `runMATLABTests` step in your Pipeline to run the tests in your MATLAB project and generate artifacts. By default, MATLAB includes any files in your project that have a `Test` label. If your Pipeline does not leverage a MATLAB project or uses a MATLAB release before R2019a, then MATLAB includes all tests in the root of your repository, including its subfolders.
+Use the `runMATLABTests` step in your Pipeline to run the tests in your MATLAB project and generate artifacts. By default, the plugin includes any test files in your [MATLAB project](https://www.mathworks.com/help/matlab/projects.html) that have a `Test` label. If your Pipeline does not use a MATLAB project, or if it uses a MATLAB release before R2019a, then the plugin includes all tests in the root of your repository or in any of its subfolders.
 
 For example, in your `Jenkinsfile`, define a Declarative Pipeline to run the tests in your project.
 
@@ -257,7 +255,7 @@ pipeline {
 }
 ``` 
 
- Use the `runMATLABTests` step in a Scripted Pipeline to run the tests in your project.
+Use the `runMATLABTests` step in a Scripted Pipeline to run the tests in your project.
 
 ```groovy
 // Scripted Pipeline
@@ -268,7 +266,7 @@ node {
 
 MATLAB exits with exit code 0 if the test suite runs successfully without any test failures. Otherwise, MATLAB terminates with a nonzero exit code, which causes the stage to fail. If you properly react to the resulting MATLAB execution exception, the remaining stages of your Pipeline can still run and your build can succeed. Otherwise, Jenkins terminates the build in the current stage and marks it as a failure.
 
-You can customize your test run and generate artifacts by providing the `runMATLABTests` step with one or more name-value arguments. For instance, you can specify different types of artifacts and the locations to store them, or you can have control over which tests to run in your project.
+You can customize your test run and generate artifacts by providing the `runMATLABTests` step with one or more name-value arguments. For instance, you can add folders to the MATLAB search path, control which tests to run, and generate various code and coverage artifacts.
 
 When you specify name-value arguments, use a colon to separate names and values. For example, define a Declarative Pipeline to run the tests in your MATLAB project, and then generate a JUnit-style test results report and a Cobertura code coverage report at specified locations on the build agent. Generate the coverage report for only the code in the `source` folder in the root of your repository. 
 
@@ -301,8 +299,6 @@ node {
 }
 ``` 
 
-
- 
  This table lists the name-value arguments that you can specify with the `runMATLABTests` step.
 
 | Name               	| Value                                                                                                                	|
