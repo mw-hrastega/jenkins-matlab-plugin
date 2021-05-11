@@ -46,11 +46,11 @@ Create a new project and configure it by following these steps:
 6. Click **Save** to save the project configuration settings. You can access and modify your settings at a later stage by selecting **Configure** in the project interface, which displays the project name at the top-left of the page.
 
 ## Run Tests and Inspect Artifacts
-To build your freestyle project, click **Build Now** in the project interface. Jenkins triggers a build, assigns it a number under **Build History**, and runs the build. If the build is successful, a blue circle icon appears next to the build number. If the build fails, Jenkins adds a red circle icon. In this example, the build succeeds because all of the tests in the Times Table App project pass.
+To build your freestyle project, click **Build Now** in the project interface. Jenkins triggers a build, assigns it a number under **Build History**, and runs the build. If the build is successful, a blue circle icon appears next to the build number. If the build fails, Jenkins adds a red circle icon. In this example, the build succeeds because all the tests in the Times Table App project pass.
 
 ![build_1](https://user-images.githubusercontent.com/48831250/105084788-dca59280-5a64-11eb-858d-664a5727a947.png)
 
-Navigate to the project workspace by clicking the **Workspace** icon in the project interface. In this example, the generated artifacts are in the `matlabTestArtifacts` folder of the workspace.
+Navigate to the project workspace by clicking the **Workspace** icon in the project interface. The generated artifacts are in the `matlabTestArtifacts` folder of the workspace.
 
 ![workspace](https://user-images.githubusercontent.com/48831250/105085419-b46a6380-5a65-11eb-8d46-747dd23291bf.png)
 
