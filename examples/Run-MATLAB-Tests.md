@@ -1,5 +1,4 @@
 # Run MATLAB Tests on Jenkins Server
-
 This example shows how to run a suite of MATLAB&reg; unit tests with Jenkins&trade;. The example demonstrates how to:
 
 * Configure a freestyle project to access MATLAB tests hosted in a remote repository.
