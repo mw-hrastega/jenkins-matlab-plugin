@@ -1,6 +1,6 @@
 When you define an automated pipeline of tasks in Jenkins&trade;, whether in the web UI or with a [`Jenkinsfile`](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/), you can use the plugin to run your MATLAB&reg; code or Simulink&reg; models. This guide demonstrates how to configure the plugin and use it in freestyle, multi-configuration, and Pipeline projects.
 
-> :information_source: **Note:** To run MATLAB code or Simulink models, Jenkins requires a valid MATLAB or Simulink license. If you have installed Jenkins as a Windows&reg; service application, you need to provide a MATLAB username and password in the **Jenkins Properties** window (accessible from within the Windows Task Manager).
+> :information_source: **Note:** To run MATLAB code or Simulink models, Jenkins requires a valid MATLAB or Simulink license. If you have installed Jenkins as a Windows&reg; service application, you need to provide a MathWorks&reg; username and password in the **Jenkins Properties** window (accessible from within the Windows Task Manager).
 
 -  [Configure Plugin in Web UI](#configure-plugin-in-web-ui)
       -  [Use MATLAB in Build](#use-matlab-in-build)
