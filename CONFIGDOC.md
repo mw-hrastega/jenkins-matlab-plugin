@@ -107,7 +107,7 @@ The plugin supports [multi-configuration (matrix) projects](https://plugins.jenk
 
 To configure the plugin for a multi-configuration project, specify the MATLAB versions to use as well as the required build steps. You can add axes in the **Configuration Matrix** section to specify the duplicating build steps. 
 
-There are two ways to specify multiple MATLAB versions in a multi-configuration project: using a MATLAB axis or using a user-defined axis.
+There are two ways to specify multiple MATLAB versions in a multi-configuration project: using the **MATLAB** axis or using a user-defined axis.
 
 ![add_axis](https://user-images.githubusercontent.com/48831250/105097497-b0930d00-5a76-11eb-9ccf-585f2d6e0bcc.png)
 
