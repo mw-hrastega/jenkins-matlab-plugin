@@ -78,9 +78,7 @@ By default, the **Run MATLAB Tests** step creates a test suite from all the test
 
 ![run_matlab_tests_filter](https://user-images.githubusercontent.com/48831250/105909635-cfa11a00-5ff5-11eb-8642-7fc037dbedf5.png)
 
- Select check boxes in the **Generate Test Artifacts** and **Generate Coverage Artifacts** sections if you want to generate test and coverage artifacts. To publish the test results, you can use these artifacts with other Jenkins plugins. By default, the plugin assigns a name to each selected artifact and stores it in the `matlabTestArtifacts` folder of the project workspace. You can override the default artifact name and location by specifying a path relative to the project folder in the **File path** box. If you leave the text box empty, the plugin does not generate an artifact.
-
-The plugin does not create the `matlabTestArtifacts` folder if the name of the folder does not appear in any of the displayed **File path** boxes.
+Select check boxes in the **Generate Test Artifacts** and **Generate Coverage Artifacts** sections if you want to generate test and coverage artifacts. To publish the test results, you can use these artifacts with other Jenkins plugins. By default, the plugin assigns a name to each selected artifact and stores it in the `matlabTestArtifacts` folder of the project workspace. You can override the default artifact name and location by specifying a path relative to the project folder in the **File path** box. The plugin does not create the `matlabTestArtifacts` folder if the name of the folder does not appear in any of the displayed **File path** boxes.
 
 ![run_matlab_tests_artifacts](https://user-images.githubusercontent.com/48831250/104773381-f7b19300-5742-11eb-9dad-392c5ca8777d.png)
 
@@ -99,9 +97,9 @@ To specify the MATLAB version, select **Use MATLAB version** in the **Build Envi
 ![build_environment](https://user-images.githubusercontent.com/48831250/105088650-2cd32380-5a6a-11eb-94ee-533f7f7fdf78.png)
 
 To run MATLAB code and Simulink models, specify the appropriate build steps in the **Build** section:
-   *   If you add the [**Run MATLAB Tests**](#run-matlab-tests) build step, specify the source code, the test suite filters, and the artifacts to be generated in the project workspace.
-   *   If you add the [**Run MATLAB Command**](#run-matlab-command) build step, enter your commands in the **Command** box. 
-
+* If you add the [**Run MATLAB Command**](#run-matlab-command) build step, Specify your MATLAB script, function, or statement in the **Command** box. 
+* If you add the [**Run MATLAB Tests**](#run-matlab-tests) build step, specify the source code, the test suite filters, and the artifacts to be generated in the project workspace.
+   
 ## Set Up Multi-Configuration Project
 The plugin supports [multi-configuration (matrix) projects](https://plugins.jenkins.io/matrix-project/). Multi-configuration projects are useful when builds include similar steps. For example:
 * The same test suite is run on different platforms (such as Windows, Linux, and macOS).
